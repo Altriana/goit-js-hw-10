@@ -12,6 +12,8 @@ const spanMinutes = document.querySelector("[data-minutes]");
 const spanSeconds = document.querySelector("[data-seconds]");
 
 
+btnStart.disabled = true;
+let userSelectedDate = null;
 
 const options = {
     enableTime: true,
@@ -22,12 +24,18 @@ const options = {
         const selectedDate = selectedDates[0];
         if (selectedDate < new Date()) {
             iziToast.warning({
+                position: 'topRight',
+                backgroundColor: 'red',
+                messageColor: '#fff',
+                iconColor: '#fff',
+                titleColor: '#fff',
                 title: 'Error',
                 message: 'Please choose a date in the future',
             });
             btnStart.disabled = true;
         } else {
             btnStart.disabled = false;
+            userSelectedDate = selectedDate;
         };
     },
 };
@@ -35,7 +43,36 @@ const options = {
 flatpickr(input, options);  
 
 
+function addingZero(value) {
+    return String(value).padStart(2, '0');
+}
 
+function updateTime({ days, hours, minutes, seconds }) {
+    spanDays.textContent = addingZero(days);
+    spanHours.textContent = addingZero(hours);
+    spanMinutes.textContent = addingZero(minutes);
+    spanSeconds.textContent = addingZero(seconds);
+}
+
+
+btnStart.addEventListener('click', () => {
+    let remainingTime;
+    const stopwatch = setInterval(() => {
+        const currentTime = new Date();
+        remainingTime = userSelectedDate - currentTime;
+        
+        if (remainingTime <= 0) {
+            clearInterval(stopwatch);
+            iziToast.success({
+                title: 'Complete',
+                message: 'Countdown finished!',
+            });
+            return;
+        };
+        const time = convertMs(remainingTime);
+        updateTime(time);
+    },1_000)
+});
 
 
 function convertMs(ms) {
