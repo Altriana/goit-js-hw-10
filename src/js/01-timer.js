@@ -28,8 +28,6 @@ const options = {
                 backgroundColor: 'red',
                 messageColor: '#fff',
                 iconColor: '#fff',
-                titleColor: '#fff',
-                title: 'Error',
                 message: 'Please choose a date in the future',
             });
             btnStart.disabled = true;
