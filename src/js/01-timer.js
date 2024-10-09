@@ -62,7 +62,9 @@ btnStart.addEventListener('click', () => {
         if (remainingTime <= 0) {
             clearInterval(stopwatch);
             iziToast.success({
-                title: 'Complete',
+                position: 'topRight',
+                backgroundColor: '#59A10D',
+                messageColor: 'white',
                 message: 'Countdown finished!',
             });
             return;
