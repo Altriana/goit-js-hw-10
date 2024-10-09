@@ -47,6 +47,7 @@ fieldset label {
     display: flex;
     color: #2E2F42;
     gap: 8px;
+    margin-top: 16px;
 }
 
 fieldset input {

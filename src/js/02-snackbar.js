@@ -24,12 +24,20 @@ form.addEventListener('submit', event => {
         .then((delay) => {
         console.log(delay);
         
-        iziToast.success({
-            message: `✅ Fulfilled promise in ${delay}ms`,
+            iziToast.success({
+                position: 'topCenter',
+                backgroundColor: '#59A10D',
+                messageColor: 'white',
+                icon: " ",
+                message: `✅ Fulfilled promise in ${delay}ms`,
         });
     })
     .catch(delay => {
         iziToast.error({
+            position: 'topCenter',
+            backgroundColor: '#EF4040',
+            messageColor: 'white',
+            icon: " ",
             message: `❌ Rejected promise in ${delay}ms`,
         });
     });
